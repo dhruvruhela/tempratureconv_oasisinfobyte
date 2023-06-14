@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature Converter</title>
+  <style>
+    /* Add some basic styling to center the content */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color:black;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h2>Temperature Converter</h2>
+    <input type="text" id="temperatureInput" placeholder="Enter temperature" />
+    <br />
+    <input type="radio" id="celsiusRadio" name="unit" checked />
+    <label for="celsiusRadio">Celsius</label>
+    <input type="radio" id="fahrenheitRadio" name="unit" />
+    <label for="fahrenheitRadio">Fahrenheit</label>
+    <br />
+    <button onclick="convertTemperature()">Convert</button>
+    <br />
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function convertTemperature() {
+      // Get the temperature input value and validate it
+      const temperatureInput = document.getElementById('temperatureInput').value;
+      if (isNaN(temperatureInput)) {
+        alert('Please enter a valid temperature!');
+        return;
+      }
+
+      // Get the selected unit (Celsius or Fahrenheit)
+      const celsiusRadio = document.getElementById('celsiusRadio');
+      const selectedUnit = celsiusRadio.checked ? 'Celsius' : 'Fahrenheit';
+
+      // Perform the temperature conversion
+      let convertedTemperature;
+      let convertedUnit;
+      if (selectedUnit === 'Celsius') {
+        convertedTemperature = (temperatureInput - 32) * 5 / 9;
+        convertedUnit = 'Celsius';
+      } else {
+        convertedTemperature = (temperatureInput * 9 / 5) + 32;
+        convertedUnit = 'Fahrenheit';
+      }
+
+      // Display the result
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = `Converted temperature: ${convertedTemperature.toFixed(2)} ${convertedUnit}`;
+    }
+  </script>
+</body>
+</html>
